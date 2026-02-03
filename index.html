@@ -120,18 +120,18 @@
                 max-width: 100%;
             }
         }
+        
     </style>
 </head>
 <body class="bg-gray-50">
-
     <div class="container mx-auto px-4 py-8 max-w-6xl">
         <header class="text-center mb-8 relative">
             <h1 class="text-3xl font-bold text-blue-600 mb-2">PHẦN MỀM TÍNH HỌC PHÍ</h1>
             <p class="text-gray-600">Phiên bản 2.4 - được phát triển bởi Lâm Chí Phương</p>
             <p class="text-gray-600">Email: lamchiphuong.work@gmail.com</p>
 
-            <button id="whatsNewBtn" class="absolute top-0 right-0 bg-indigo-600 text-white text-sm px-3 py-1 rounded hover:bg-indigo-700 transition">
-                What's New (2.4)
+            <button id="whatsNewBtn" class="absolute top-2 right-2 bg-indigo-600 text-white px-3 py-1 rounded text-sm hover:bg-indigo-700 transition">
+                What's New
             </button>
         </header>
 
@@ -139,6 +139,7 @@
             <!-- Student Input Section -->
             <div class="bg-white rounded-xl shadow-md p-6 lg:col-span-1">
                 <h2 class="text-xl font-semibold mb-4 text-gray-800">Thông tin học viên</h2>
+             
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-1" for="studentName">Tên học viên</label>
                     <input type="text" id="studentName" placeholder="Nhập tên học viên" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -166,10 +167,10 @@
                 </div>
                 <input type="file" id="fileInput" accept=".json" class="hidden">
             </div>
-
             <!-- Calendar Section -->
             <div class="bg-white rounded-xl shadow-md p-6 lg:col-span-2">
                 <h2 class="text-xl font-semibold mb-4 text-gray-800">Điểm danh buổi học</h2>
+             
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-1">Chọn học viên</label>
                     <select id="studentSelect" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -178,7 +179,9 @@
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Chọn buổi học</label>
-                    <div id="calendarGrid" class="grid grid-cols-7 gap-2"></div>
+                    <div id="calendarGrid" class="grid grid-cols-7 gap-2">
+                        <!-- Calendar days will be added here by JavaScript -->
+                    </div>
                 </div>
                 <div class="flex justify-between">
                     <button id="prevMonthBtn" class="bg-gray-200 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-300 transition duration-200">
@@ -191,11 +194,14 @@
                 </div>
             </div>
         </div>
-
+        <!-- Student List and Fee Calculation -->
         <div class="mt-8">
             <h2 class="text-xl font-semibold mb-4 text-gray-800">Danh sách học viên và học phí</h2>
-            <div id="studentsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-
+         
+            <div id="studentsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Student cards will be added here by JavaScript -->
+            </div>
+            <!-- Summary Section -->
             <div class="mt-6 bg-white rounded-xl shadow-md p-6">
                 <div class="flex justify-between items-center">
                     <div>
@@ -218,7 +224,7 @@
         </div>
     </div>
 
-    <!-- Modal What's New -->
+    <!-- Modal What's New - bổ sung mới -->
     <div id="whatsNewModal" class="modal">
         <div class="modal-content max-w-lg">
             <div class="flex justify-between items-center mb-4">
@@ -228,11 +234,11 @@
             <div class="space-y-3 text-gray-700">
                 <p><strong>Thay đổi chính:</strong></p>
                 <ul class="list-disc pl-5 space-y-1">
-                    <li>Giảm giá và ghi chú giờ là <strong>riêng cho từng tháng</strong> (không còn áp dụng chung)</li>
+                    <li>Giảm giá và ghi chú giờ là <strong>riêng cho từng tháng</strong> (không áp dụng chung nữa)</li>
                     <li>Thêm nút "What's New" để xem thông tin cập nhật</li>
-                    <li>Giữ nguyên tất cả chức năng cũ: điểm danh, xuất phiếu, in ấn, lưu/mở file</li>
+                    <li>Giữ nguyên tất cả chức năng cũ của phiên bản 2.3</li>
                 </ul>
-                <p class="text-sm italic mt-4">Cảm ơn anh đã sử dụng phần mềm!</p>
+                <p class="text-sm italic mt-4">Nếu có góp ý thêm, anh cứ nhắn em nhé!</p>
             </div>
             <div class="mt-6 text-right">
                 <button id="closeWhatsNewConfirmBtn" class="bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700">
@@ -242,7 +248,7 @@
         </div>
     </div>
 
-    <!-- Edit Discount Modal -->
+    <!-- Edit Discount Modal - sửa để per-month -->
     <div id="editDiscountModal" class="modal">
         <div class="modal-content max-w-md">
             <div class="flex justify-between items-center mb-4">
@@ -268,7 +274,7 @@
         </div>
     </div>
 
-    <!-- Edit Notes Modal -->
+    <!-- Edit Notes Modal - sửa để per-month -->
     <div id="editNotesModal" class="modal">
         <div class="modal-content max-w-md">
             <div class="flex justify-between items-center mb-4">
@@ -294,7 +300,7 @@
         </div>
     </div>
 
-    <!-- Select Students Modal -->
+    <!-- Select Students Modal giữ nguyên -->
     <div id="selectStudentsModal" class="modal">
         <div class="modal-content">
             <div class="flex justify-between items-center mb-4">
@@ -305,7 +311,9 @@
                     </svg>
                 </button>
             </div>
-            <div id="selectStudentsList" class="mb-4 max-h-60 overflow-y-auto"></div>
+            <div id="selectStudentsList" class="mb-4 max-h-60 overflow-y-auto">
+                <!-- Student checkboxes will be added here by JavaScript -->
+            </div>
             <div class="flex justify-between mb-4">
                 <label class="flex items-center">
                     <input type="checkbox" id="selectAllStudents" class="mr-2">
@@ -324,33 +332,37 @@
         </div>
     </div>
 
-    <!-- Receipt Modal -->
+    <!-- Receipt Modal giữ nguyên -->
     <div id="receiptModal" class="modal">
         <div class="modal-content" id="printable-receipt">
             <div class="text-center mb-6">
-                <h2 class="text-3xl font-bold text-blue-600">PHIẾU BÁO HỌC PHÍ</h2>
-                <h3 class="text-2xl font-semibold text-gray-800 mt-3">THÁNG <span id="receiptMonthDisplay"></span></h3>
-            </div>
+    <h2 class="text-3xl font-bold text-blue-600">PHIẾU BÁO HỌC PHÍ</h2>
+    <h3 class="text-2xl font-semibold text-gray-800 mt-3">THÁNG <span id="receiptMonthDisplay"></span></h3>
+</div>
 
-            <div class="flex justify-end mb-4 no-print">
-                <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-
+<div class="flex justify-end mb-4 no-print">
+    <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+    </button>
+</div>
+         
             <div class="flex justify-between mb-6">
                 <p class="text-sm"><strong>Ngày xuất:</strong> <span id="receiptDate"></span></p>
                 <p class="text-sm"><strong>Mã phiếu:</strong> HPDK-<span id="receiptNumber"></span></p>
             </div>
-
-            <div id="receiptContent"></div>
-
+         
+         
+            <div id="receiptContent">
+                <!-- Filled by JavaScript -->
+            </div>
+    
+         
             <div class="mt-6 text-right">
                 <p class="text-xl font-bold">TỔNG CỘNG: <span id="receiptTotalFee" class="text-blue-600">0</span> đ</p>
             </div>
-
+         
             <div class="mt-8 flex justify-between">
                 <div class="text-center">
                     <p class="font-bold">Người lập phiếu</p>
@@ -361,7 +373,7 @@
                     <p class="text-sm text-gray-500 mt-4">(Ký, ghi rõ họ tên)</p>
                 </div>
             </div>
-
+         
             <div class="mt-6 flex justify-center no-print">
                 <button id="printReceiptBtn" class="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition duration-200">
                     In phiếu
@@ -371,18 +383,14 @@
     </div>
 
 <script>
-    // ================================================
-    // BIẾN TOÀN CỤC
-    // ================================================
+    // Initialize variables
     let currentMonth = new Date().getMonth();
     let currentYear = new Date().getFullYear();
     let students = [];
     let lastSavedState = null;
     let currentEditingStudentId = null;
-
-    // ================================================
-    // DOM ELEMENTS
-    // ================================================
+ 
+    // DOM Elements
     const studentNameEl = document.getElementById('studentName');
     const studentClassEl = document.getElementById('studentClass');
     const feeRateEl = document.getElementById('feeRate');
@@ -407,6 +415,7 @@
     const loadFromFileBtn = document.getElementById('loadFromFileBtn');
     const saveToFileBtn = document.getElementById('saveToFileBtn');
     const fileInputEl = document.getElementById('fileInput');
+    // Select Students Modal Elements
     const selectStudentsModal = document.getElementById('selectStudentsModal');
     const selectStudentsListEl = document.getElementById('selectStudentsList');
     const selectAllStudentsEl = document.getElementById('selectAllStudents');
@@ -414,93 +423,63 @@
     const generateReceiptBtn = document.getElementById('generateReceiptBtn');
     const closeSelectModalBtn = document.getElementById('closeSelectModalBtn');
     const cancelSelectBtn = document.getElementById('cancelSelectBtn');
+    // Edit Notes Modal Elements
     const editNotesModal = document.getElementById('editNotesModal');
     const editNotesTextarea = document.getElementById('editNotesTextarea');
     const closeEditNotesBtn = document.getElementById('closeEditNotesBtn');
     const cancelEditNotesBtn = document.getElementById('cancelEditNotesBtn');
     const saveEditNotesBtn = document.getElementById('saveEditNotesBtn');
+    // Edit Discount Modal Elements
     const editDiscountModal = document.getElementById('editDiscountModal');
     const editDiscountInput = document.getElementById('editDiscountInput');
     const closeEditDiscountBtn = document.getElementById('closeEditDiscountBtn');
     const cancelEditDiscountBtn = document.getElementById('cancelEditDiscountBtn');
     const saveEditDiscountBtn = document.getElementById('saveEditDiscountBtn');
+    // What's New Modal
     const whatsNewModal = document.getElementById('whatsNewModal');
     const closeWhatsNewBtn = document.getElementById('closeWhatsNewBtn');
     const closeWhatsNewConfirmBtn = document.getElementById('closeWhatsNewConfirmBtn');
-    const whatsNewBtn = document.getElementById('whatsNewBtn');
 
-    // ================================================
-    // UTILITY FUNCTIONS
-    // ================================================
-    function getCurrentMonthKey() {
-        return `${currentMonth + 1}-${currentYear}`;
-    }
-
-    function saveStudents() {
-        localStorage.setItem('tutoringStudents', JSON.stringify(students));
-    }
-
-    function formatDate(date) {
-        const d = new Date(date);
-        let month = '' + (d.getMonth() + 1);
-        let day = '' + d.getDate();
-        const year = d.getFullYear();
-        if (month.length < 2) month = '0' + month;
-        if (day.length < 2) day = '0' + day;
-        return [year, month, day].join('-');
-    }
-
-    function formatDisplayDate(dateStr) {
-        const date = new Date(dateStr);
-        const day = date.getDate();
-        const month = date.getMonth() + 1;
-        const year = date.getFullYear();
-        return `${day}/${month}/${year}`;
-    }
-
-    // ================================================
-    // LOAD & MIGRATE DỮ LIỆU
-    // ================================================
+    // Initialize the app
     document.addEventListener('DOMContentLoaded', function() {
         updateMonthYearDisplay();
         generateCalendar();
-
+     
+        // Load students from localStorage if available
         const savedStudents = localStorage.getItem('tutoringStudents');
         if (savedStudents) {
-            try {
-                students = JSON.parse(savedStudents);
-                // Migration: chuyển discount/notes cũ sang dạng object per-month
-                students = students.map(s => {
-                    let discounts = s.discounts || {};
-                    let notes = s.notes || {};
-                    if (typeof s.discount === 'number') {
-                        discounts[getCurrentMonthKey()] = s.discount;
-                    }
-                    if (typeof s.notes === 'string' && s.notes.trim()) {
-                        notes[getCurrentMonthKey()] = s.notes;
-                    }
-                    return {
-                        ...s,
-                        discounts,
-                        notes,
-                        sessions: s.sessions && Array.isArray(s.sessions) ? {} : s.sessions || {},
-                        discount: undefined, // xóa key cũ
-                    };
-                });
-                updateStudentSelect();
-                renderStudentCards();
-                updateSummary();
-            } catch (e) {
-                console.error("Lỗi parse dữ liệu cũ:", e);
-            }
-        }
+            students = JSON.parse(savedStudents);
+            // Migration: chuyển discount và notes cũ sang dạng object theo tháng
+            students = students.map(student => {
+                let discounts = student.discounts || {};
+                let notes = student.notes || {};
 
+                // Nếu còn dùng key cũ (discount là number, notes là string)
+                if (typeof student.discount === 'number') {
+                    discounts[getCurrentMonthKey()] = student.discount;
+                }
+                if (typeof student.notes === 'string' && student.notes.trim()) {
+                    notes[getCurrentMonthKey()] = student.notes;
+                }
+
+                return {
+                    ...student,
+                    discounts: discounts,
+                    notes: notes,
+                    sessions: student.sessions && Array.isArray(student.sessions) ? {} : student.sessions || {}
+                };
+            });
+            updateStudentSelect();
+            renderStudentCards();
+            updateSummary();
+        }
+     
         // Event listeners
         addStudentBtn.addEventListener('click', addStudent);
         prevMonthBtn.addEventListener('click', showPreviousMonth);
         nextMonthBtn.addEventListener('click', showNextMonth);
         studentSelectEl.addEventListener('change', updateAttendanceCheckboxes);
-        calendarGridEl.addEventListener('change', handleCalendarChange);
+        calendarGridEl.addEventListener('change', handleCalendarChange); 
         clearAllBtn.addEventListener('click', clearAllData);
         showReceiptBtn.addEventListener('click', openSelectStudentsModal);
         closeModalBtn.addEventListener('click', closeReceiptModal);
@@ -508,113 +487,161 @@
         loadFromFileBtn.addEventListener('click', () => fileInputEl.click());
         saveToFileBtn.addEventListener('click', saveToFile);
         fileInputEl.addEventListener('change', loadFromFile);
-
+     
+        // Select Students Modal Event Listeners
         closeSelectModalBtn.addEventListener('click', closeSelectStudentsModal);
         cancelSelectBtn.addEventListener('click', closeSelectStudentsModal);
         selectAllStudentsEl.addEventListener('change', toggleSelectAll);
         generateReceiptBtn.addEventListener('click', generateReceiptFromSelection);
-
+     
+        // Edit Notes Modal Event Listeners
         closeEditNotesBtn.addEventListener('click', closeEditNotesModal);
         cancelEditNotesBtn.addEventListener('click', closeEditNotesModal);
         saveEditNotesBtn.addEventListener('click', saveEditNotes);
-
+     
+        // Edit Discount Modal Event Listeners
         closeEditDiscountBtn.addEventListener('click', closeEditDiscountModal);
         cancelEditDiscountBtn.addEventListener('click', closeEditDiscountModal);
         saveEditDiscountBtn.addEventListener('click', saveEditDiscount);
 
-        whatsNewBtn.addEventListener('click', () => whatsNewModal.style.display = 'block');
-        closeWhatsNewBtn.addEventListener('click', () => whatsNewModal.style.display = 'none');
-        closeWhatsNewConfirmBtn.addEventListener('click', () => whatsNewModal.style.display = 'none');
-
+        // What's New modal
+        whatsNewBtn.addEventListener('click', function() {
+            whatsNewModal.style.display = 'block';
+        });
+        closeWhatsNewBtn.addEventListener('click', function() {
+            whatsNewModal.style.display = 'none';
+        });
+        closeWhatsNewConfirmBtn.addEventListener('click', function() {
+            whatsNewModal.style.display = 'none';
+        });
+     
+        // Close modals when clicking outside
         window.addEventListener('click', function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = 'none';
+            if (event.target === receiptModal) {
+                closeReceiptModal();
+            }
+            if (event.target === selectStudentsModal) {
+                closeSelectStudentsModal();
+            }
+            if (event.target === editNotesModal) {
+                closeEditNotesModal();
+            }
+            if (event.target === editDiscountModal) {
+                closeEditDiscountModal();
+            }
+            if (event.target === whatsNewModal) {
+                whatsNewModal.style.display = 'none';
             }
         });
     });
 
+    // === THÊM MỚI: Hàm lấy key tháng hiện tại ===
+    function getCurrentMonthKey() {
+        return `${currentMonth + 1}-${currentYear}`; 
+    }
+ 
+    // Save students to localStorage
+    function saveStudents() {
+        localStorage.setItem('tutoringStudents', JSON.stringify(students));
+    }
+ 
+    // Add a new student
     function addStudent() {
         const name = studentNameEl.value.trim();
         const className = studentClassEl.value.trim();
         const feeRate = parseInt(feeRateEl.value) || 100000;
-
-        if (!name) return alert('Vui lòng nhập tên học viên');
-        if (students.some(s => s.name.toLowerCase() === name.toLowerCase())) return alert('Học viên đã tồn tại');
-
-        students.push({
+     
+        if (!name) {
+            alert('Vui lòng nhập tên học viên');
+            return;
+        }
+     
+        if (students.some(student => student.name.toLowerCase() === name.toLowerCase())) {
+            alert('Học viên đã tồn tại trong hệ thống');
+            return;
+        }
+     
+        const student = {
             id: Date.now().toString(),
-            name,
+            name: name,
             class: className,
-            feeRate,
-            discounts: {},
-            notes: {},
+            feeRate: feeRate,
+            discounts: {},     // thay vì discount: 0
+            notes: {},         // thay vì notes: ''
             sessions: {}
-        });
-
+        };
+     
+        students.push(student);
         saveStudents();
         updateStudentSelect();
         renderStudentCards();
         updateSummary();
-
+     
         studentNameEl.value = '';
         studentClassEl.value = '';
         feeRateEl.value = '100000';
     }
-
+ 
+    // Update student dropdown
     function updateStudentSelect() {
         studentSelectEl.innerHTML = '<option value="">-- Chọn học viên --</option>';
-        students.forEach(s => {
-            const opt = document.createElement('option');
-            opt.value = s.id;
-            opt.textContent = `${s.name} (${s.class ? s.class + ' - ' : ''}${s.feeRate.toLocaleString()} đ/buổi)`;
-            studentSelectEl.appendChild(opt);
+     
+        students.forEach(student => {
+            const option = document.createElement('option');
+            option.value = student.id;
+            const classDisplay = student.class ? `${student.class} - ` : '';
+            option.textContent = `${student.name} (${classDisplay}${student.feeRate.toLocaleString()} đ/buổi)`;
+            studentSelectEl.appendChild(option);
         });
     }
-
+ 
+    // Generate calendar for the current month
     function generateCalendar() {
         calendarGridEl.innerHTML = '';
+     
         const firstDay = new Date(currentYear, currentMonth, 1);
         const lastDay = new Date(currentYear, currentMonth + 1, 0);
         const daysInMonth = lastDay.getDate();
+     
         let startingDay = firstDay.getDay();
         startingDay = (startingDay === 0) ? 6 : startingDay - 1;
-
+     
         for (let i = 0; i < startingDay; i++) {
             const emptyCell = document.createElement('div');
             emptyCell.className = 'h-8';
             calendarGridEl.appendChild(emptyCell);
         }
-
+     
         for (let day = 1; day <= daysInMonth; day++) {
             const date = new Date(currentYear, currentMonth, day);
             const formattedDate = formatDate(date);
-
+         
             const dayCell = document.createElement('div');
             dayCell.className = 'flex flex-col items-center';
-
+         
             const weekdays = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"];
             const weekdayLabel = document.createElement('span');
             weekdayLabel.className = 'text-xs text-gray-500';
             weekdayLabel.textContent = weekdays[date.getDay()];
-
+         
             const dayNumber = document.createElement('span');
             dayNumber.className = 'text-sm font-medium';
             dayNumber.textContent = day;
-
+         
             const checkboxContainer = document.createElement('label');
             checkboxContainer.className = 'checkbox-container mt-1 cursor-pointer';
-
+         
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
             checkbox.className = 'hidden';
             checkbox.dataset.date = formattedDate;
-
+         
             const checkmark = document.createElement('span');
             checkmark.className = 'checkmark block w-6 h-6 border border-gray-300 rounded';
-
+         
             checkboxContainer.appendChild(checkbox);
             checkboxContainer.appendChild(checkmark);
-
+         
             dayCell.appendChild(weekdayLabel);
             dayCell.appendChild(dayNumber);
             dayCell.appendChild(checkboxContainer);
@@ -627,23 +654,26 @@
             toggleSession(event.target.dataset.date, event.target.checked);
         }
     }
-
+ 
     function toggleSession(date, attended) {
         const studentId = studentSelectEl.value;
+     
         if (!studentId) {
             alert('Vui lòng chọn học viên trước khi điểm danh');
             const checkbox = calendarGridEl.querySelector(`input[data-date="${date}"]`);
-            if (checkbox) checkbox.checked = !attended;
+            if (checkbox) checkbox.checked = !attended; 
             return false;
         }
-
+     
         const student = students.find(s => s.id === studentId);
         const monthKey = getCurrentMonthKey();
-
-        if (!student.sessions[monthKey]) student.sessions[monthKey] = [];
-
+     
+        if (!student.sessions[monthKey]) {
+            student.sessions[monthKey] = [];
+        }
+     
         let monthSessions = student.sessions[monthKey];
-
+     
         if (attended) {
             if (!monthSessions.includes(date)) {
                 monthSessions.push(date);
@@ -652,63 +682,69 @@
         } else {
             monthSessions = monthSessions.filter(d => d !== date);
         }
-
+     
         student.sessions[monthKey] = monthSessions;
+     
         saveStudents();
         renderStudentCards();
         updateSummary();
         return true;
     }
-
+ 
     function updateAttendanceCheckboxes() {
         const studentId = studentSelectEl.value;
         const checkboxes = calendarGridEl.querySelectorAll('input[type="checkbox"]');
         const monthKey = getCurrentMonthKey();
-
+     
         checkboxes.forEach(checkbox => {
             checkbox.checked = false;
+         
             if (studentId) {
                 const student = students.find(s => s.id === studentId);
-                const monthSessions = student.sessions[monthKey] || [];
+                const monthSessions = student.sessions[monthKey] || []; 
                 if (monthSessions.includes(checkbox.dataset.date)) {
                     checkbox.checked = true;
                 }
             }
         });
     }
-
+ 
     function showPreviousMonth() {
         currentMonth--;
+     
         if (currentMonth < 0) {
             currentMonth = 11;
             currentYear--;
         }
+     
         updateMonthYearDisplay();
         generateCalendar();
         updateAttendanceCheckboxes();
         renderStudentCards();
         updateSummary();
     }
-
+ 
     function showNextMonth() {
         currentMonth++;
+     
         if (currentMonth > 11) {
             currentMonth = 0;
             currentYear++;
         }
+     
         updateMonthYearDisplay();
         generateCalendar();
         updateAttendanceCheckboxes();
         renderStudentCards();
         updateSummary();
     }
-
+ 
     function updateMonthYearDisplay() {
         const months = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
                        'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
         currentMonthYearEl.textContent = `${months[currentMonth]} ${currentYear}`;
     }
-
+ 
     function renderStudentCards() {
         studentsListEl.innerHTML = '';
         const monthKey = getCurrentMonthKey();
@@ -722,23 +758,23 @@
             const totalFeeBeforeDiscount = sessionCount * student.feeRate;
             const discountAmount = totalFeeBeforeDiscount * (discount / 100);
             const totalFee = totalFeeBeforeDiscount - discountAmount;
-
+         
             const card = document.createElement('div');
             card.className = 'fee-card bg-white rounded-lg overflow-hidden shadow-md border-l-4 border-blue-500 hover:border-blue-600';
-
+         
             let notesHtml = '';
-            if (notes.trim()) {
+            if (notes && notes.trim()) {
                 notesHtml = `
                     <div class="mt-3 p-2 bg-yellow-50 border border-yellow-200 rounded text-sm text-gray-700">
-                        <strong>Ghi chú (tháng này):</strong><br>${notes.replace(/\n/g, '<br>')}
+                        <strong>Ghi chú tháng này:</strong> ${notes.replace(/\n/g, '<br>')}
                     </div>
                 `;
             }
-
-            const buttonText = notes.trim() ? 'Chỉnh sửa ghi chú' : 'Thêm ghi chú';
+         
+            const buttonText = notes && notes.trim() ? 'Chỉnh sửa ghi chú' : 'Thêm ghi chú';
             const classDisplay = student.class ? `<p class="text-sm text-gray-600 mt-1">Lớp: ${student.class}</p>` : '';
             const discountDisplay = discount > 0 ? `<div class="flex justify-between mt-1"><span class="text-gray-600 text-xs">Giảm giá:</span><span class="font-medium text-xs text-red-600">${discount}%</span></div>` : '';
-
+         
             card.innerHTML = `
                 <div class="p-4">
                     <div class="flex justify-between items-start mb-3">
@@ -748,7 +784,7 @@
                                 <button class="edit-notes-btn bg-yellow-500 text-white px-2 py-1 rounded text-xs hover:bg-yellow-600 transition duration-200" data-id="${student.id}">
                                     ${buttonText}
                                 </button>
-                                ${notes.trim() ? `<button class="delete-notes-btn bg-red-400 text-white px-2 py-1 rounded text-xs hover:bg-red-500 transition duration-200" data-id="${student.id}">Xóa ghi chú</button>` : ''}
+                                ${notes && notes.trim() ? `<button class="delete-notes-btn bg-red-400 text-white px-2 py-1 rounded text-xs hover:bg-red-500 transition duration-200" data-id="${student.id}">Xóa ghi chú</button>` : ''}
                             </div>
                             <div class="flex space-x-1">
                                 <button class="edit-discount-btn bg-green-500 text-white px-2 py-1 rounded text-xs hover:bg-green-600 transition duration-200" data-id="${student.id}">
@@ -779,10 +815,10 @@
                     ${notesHtml}
                 </div>
             `;
-
+         
             studentsListEl.appendChild(card);
         });
-
+     
         document.querySelectorAll('.delete-student-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 deleteStudent(this.dataset.id);
@@ -804,7 +840,7 @@
             });
         });
     }
-
+ 
     function editNotes(studentId) {
         currentEditingStudentId = studentId;
         const student = students.find(s => s.id === studentId);
@@ -838,6 +874,13 @@
         }
     }
 
+    function closeEditNotesModal() {
+        editNotesModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        currentEditingStudentId = null;
+        editNotesTextarea.value = '';
+    }
+
     function editDiscount(studentId) {
         currentEditingStudentId = studentId;
         const student = students.find(s => s.id === studentId);
@@ -862,27 +905,22 @@
         }
     }
 
-    function closeEditNotesModal() {
-        editNotesModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-        currentEditingStudentId = null;
-    }
-
     function closeEditDiscountModal() {
         editDiscountModal.style.display = 'none';
         document.body.style.overflow = 'auto';
         currentEditingStudentId = null;
+        editDiscountInput.value = '';
     }
 
     function deleteStudent(id) {
         if (confirm('Bạn có chắc muốn xóa học viên này?')) {
             students = students.filter(student => student.id !== id);
             saveStudents();
-
+         
             if (studentSelectEl.value === id) {
                 studentSelectEl.value = '';
             }
-
+         
             updateStudentSelect();
             renderStudentCards();
             updateSummary();
@@ -905,19 +943,39 @@
     function updateSummary() {
         let totalFees = 0;
         const monthKey = getCurrentMonthKey();
-
+     
         students.forEach(student => {
             const studentSessions = student.sessions[monthKey] || [];
             const sessionCount = studentSessions.length;
             const discount = student.discounts[monthKey] || 0;
-
+            
             const totalFeeBeforeDiscount = sessionCount * student.feeRate;
             const discountAmount = totalFeeBeforeDiscount * (discount / 100);
             totalFees += totalFeeBeforeDiscount - discountAmount;
         });
-
+     
         totalStudentsEl.textContent = students.length;
         totalFeesEl.textContent = totalFees.toLocaleString();
+    }
+
+    function formatDate(date) {
+        const d = new Date(date);
+        let month = '' + (d.getMonth() + 1);
+        let day = '' + d.getDate();
+        const year = d.getFullYear();
+     
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+     
+        return [year, month, day].join('-');
+    }
+
+    function formatDisplayDate(dateStr) {
+        const date = new Date(dateStr);
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
     }
 
     function openSelectStudentsModal() {
@@ -950,13 +1008,13 @@
             const totalFeeBeforeDiscount = sessionCount * student.feeRate;
             const discountAmount = totalFeeBeforeDiscount * (discount / 100);
             const totalFee = totalFeeBeforeDiscount - discountAmount;
-
+            
             const div = document.createElement('div');
             div.className = 'flex items-center p-2 border-b';
             const classDisplay = student.class ? `${student.class} - ` : '';
             const notesInfo = student.notes[monthKey] && student.notes[monthKey].trim() ? ` (Có ghi chú: "${student.notes[monthKey].substring(0, 30)}${student.notes[monthKey].length > 30 ? '...' : ''}")` : ' (Không có ghi chú)';
             const discountInfo = discount > 0 ? ` (Giảm ${discount}%)` : '';
-
+            
             div.innerHTML = `
                 <input type="checkbox" class="mr-2 student-select-checkbox" data-id="${student.id}" id="select-${student.id}">
                 <label for="select-${student.id}" class="flex-1 cursor-pointer text-sm">
@@ -972,7 +1030,16 @@
             checkbox.addEventListener('change', updateGenerateButton);
         });
 
-        updateGenerateButton();
+        document.querySelectorAll('.include-notes-checkbox').forEach(checkbox => {
+            const studentId = checkbox.dataset.id;
+            const student = students.find(s => s.id === studentId);
+            if (!student.notes[monthKey] || !student.notes[monthKey].trim()) {
+                checkbox.disabled = true;
+                checkbox.checked = false;
+            } else {
+                checkbox.checked = true;
+            }
+        });
     }
 
     function toggleSelectAll() {
@@ -993,7 +1060,7 @@
         const count = checkboxes.length;
         selectedCountEl.textContent = `${count} học viên được chọn`;
         generateReceiptBtn.disabled = count === 0;
-
+        
         if (students.length > 0) {
             if (count === students.length) {
                 selectAllStudentsEl.checked = true;
@@ -1034,138 +1101,171 @@
         document.body.style.overflow = 'auto';
     }
 
-    function updateReceiptContent(selectedStudents = students, includeNotesMap = {}) {
-        receiptContentEl.innerHTML = '';
-        const today = new Date();
-        receiptDateEl.textContent = today.toLocaleDateString('vi-VN');
+    function printReceipt() {
+        window.print();
+    }
 
-        const monthKey = getCurrentMonthKey();
+function updateReceiptContent(selectedStudents = students, includeNotesMap = {}) {
+    receiptContentEl.innerHTML = '';
+    const today = new Date();
+    receiptDateEl.textContent = today.toLocaleDateString('vi-VN');
+    
+    const monthKey = getCurrentMonthKey();
 
-        const monthsDisplay = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
-        document.getElementById('receiptMonthDisplay').textContent = `${monthsDisplay[currentMonth]} / ${currentYear}`;
+    const monthsDisplay = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+    document.getElementById('receiptMonthDisplay').textContent = 
+        `${monthsDisplay[currentMonth]} / ${currentYear}`;
+        
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const year = String(today.getFullYear()).slice(-2);
+    
+    const currentState = JSON.stringify(selectedStudents.map(s => ({
+        id: s.id, 
+        sessions: s.sessions[monthKey] || [], 
+        includeNotes: includeNotesMap[s.id]
+    })));
+    
+    let receiptCounter = localStorage.getItem(`receiptCounter-${month}${year}`) || 0;
+    if (lastSavedState !== currentState) {
+        receiptCounter = parseInt(receiptCounter) + 1;
+        localStorage.setItem(`receiptCounter-${month}${year}`, receiptCounter);
+        lastSavedState = currentState;
+    }
+    const serial = String(receiptCounter).padStart(5, '0');
+    receiptNumberEl.textContent = `${month}${year}-${serial}`;
 
-        const month = String(today.getMonth() + 1).padStart(2, '0');
-        const year = String(today.getFullYear()).slice(-2);
-
-        const currentState = JSON.stringify(selectedStudents.map(s => ({
-            id: s.id, 
-            sessions: s.sessions[monthKey] || [], 
-            includeNotes: includeNotesMap[s.id]
-        })));
-
-        let receiptCounter = localStorage.getItem(`receiptCounter-${month}${year}`) || 0;
-        if (lastSavedState !== currentState) {
-            receiptCounter = parseInt(receiptCounter) + 1;
-            localStorage.setItem(`receiptCounter-${month}${year}`, receiptCounter);
-            lastSavedState = currentState;
-        }
-        const serial = String(receiptCounter).padStart(5, '0');
-        receiptNumberEl.textContent = `${month}${year}-${serial}`;
-
-        let totalFee = 0;
-        selectedStudents.forEach(student => {
-            const studentSessions = student.sessions[monthKey] || [];
-            const sessionCount = studentSessions.length;
-            const discount = student.discounts[monthKey] || 0;
-
-            const totalFeeBeforeDiscount = sessionCount * student.feeRate;
-            const discountAmount = totalFeeBeforeDiscount * (discount / 100);
-            const studentTotal = totalFeeBeforeDiscount - discountAmount;
-            totalFee += studentTotal;
-
-            const studentSection = document.createElement('div');
-            studentSection.className = "mb-6 p-4 border rounded-lg bg-gray-50";
-            const header = document.createElement('h3');
-            header.className = "font-bold text-lg text-blue-600 mb-2";
-            const classDisplay = student.class ? ` - Lớp ${student.class}` : '';
-            header.textContent = `Học viên: ${student.name}${classDisplay}`;
-            studentSection.appendChild(header);
-            const row = document.createElement('div');
-            row.className = 'receipt-row receipt-header';
-            row.innerHTML = `
-                <div>Tên học viên</div>
-                <div>Số buổi</div>
-                <div>Đơn giá</div>
-                <div>Thành tiền</div>
+    let totalFee = 0;
+    selectedStudents.forEach(student => {
+        const studentSessions = student.sessions[monthKey] || [];
+        const sessionCount = studentSessions.length;
+        const discount = student.discounts[monthKey] || 0;
+        
+        const totalFeeBeforeDiscount = sessionCount * student.feeRate;
+        const discountAmount = totalFeeBeforeDiscount * (discount / 100);
+        const studentTotal = totalFeeBeforeDiscount - discountAmount;
+        totalFee += studentTotal;
+        
+        const studentSection = document.createElement('div');
+        studentSection.className = "mb-6 p-4 border rounded-lg bg-gray-50";
+        const header = document.createElement('h3');
+        header.className = "font-bold text-lg text-blue-600 mb-2";
+        const classDisplay = student.class ? ` - Lớp ${student.class}` : '';
+        header.textContent = `Học viên: ${student.name}${classDisplay}`;
+        studentSection.appendChild(header);
+        
+        // Header row
+        const row = document.createElement('div');
+        row.className = 'receipt-row receipt-header';
+        row.innerHTML = `
+            <div>Tên học viên</div>
+            <div>Số buổi</div>
+            <div>Đơn giá</div>
+            <div>Thành tiền</div>
+        `;
+        studentSection.appendChild(row);
+        
+        // Dữ liệu gốc (thành tiền = giá gốc)
+        const dataRow = document.createElement('div');
+        dataRow.className = 'receipt-row';
+        dataRow.innerHTML = `
+            <div>${student.name}</div>
+            <div>${sessionCount}</div>
+            <div>${student.feeRate.toLocaleString()} đ</div>
+            <div>${totalFeeBeforeDiscount.toLocaleString()} đ</div>
+        `;
+        studentSection.appendChild(dataRow);
+        
+        // Dòng giảm giá (nếu có)
+        if (discount > 0) {
+            const discountRow = document.createElement('div');
+            discountRow.className = 'receipt-row text-sm text-red-600';
+            discountRow.innerHTML = `
+                <div></div>
+                <div></div>
+                <div>Giảm giá: ${discount}%</div>
+                <div>-${discountAmount.toLocaleString()} đ</div>
             `;
-            studentSection.appendChild(row);
-            const dataRow = document.createElement('div');
-            dataRow.className = 'receipt-row';
-            dataRow.innerHTML = `
-                <div>${student.name}</div>
-                <div>${sessionCount}</div>
-                <div>${student.feeRate.toLocaleString()} đ</div>
+            studentSection.appendChild(discountRow);
+            
+            // Dòng tổng sau giảm
+            const afterDiscountRow = document.createElement('div');
+            afterDiscountRow.className = 'receipt-row font-bold text-blue-600 mt-2';
+            afterDiscountRow.innerHTML = `
+                <div></div>
+                <div></div>
+                <div>Tổng sau giảm:</div>
                 <div>${studentTotal.toLocaleString()} đ</div>
             `;
-            studentSection.appendChild(dataRow);
-            if (discount > 0) {
-                const discountRow = document.createElement('div');
-                discountRow.className = 'receipt-row text-sm text-red-600';
-                discountRow.innerHTML = `
-                    <div></div>
-                    <div></div>
-                    <div>Giảm giá: ${discount}%</div>
-                    <div>-${discountAmount.toLocaleString()} đ</div>
-                `;
-                studentSection.appendChild(discountRow);
-            }
-            if (studentSessions.length > 0) {
-                const detailTitle = document.createElement('p');
-                detailTitle.className = "font-medium mt-4";
-                detailTitle.textContent = "Chi tiết buổi học:";
-                studentSection.appendChild(detailTitle);
-                const sessionGrid = document.createElement('div');
-                sessionGrid.className = "session-grid mt-2";
+            studentSection.appendChild(afterDiscountRow);
+        }
+        
+        // Chi tiết buổi học
+        if (studentSessions.length > 0) {
+            const detailTitle = document.createElement('p');
+            detailTitle.className = "font-medium mt-4";
+            detailTitle.textContent = "Chi tiết buổi học:";
+            studentSection.appendChild(detailTitle);
+            const sessionGrid = document.createElement('div');
+            sessionGrid.className = "session-grid mt-2";
+            
+            studentSessions.forEach(session => {
+                const sessionItem = document.createElement('div');
+                sessionItem.className = 'session-item';
+                sessionItem.textContent = formatDisplayDate(session);
+                sessionGrid.appendChild(sessionItem);
+            });
+            studentSection.appendChild(sessionGrid);
+        }
+        
+        // Ghi chú nếu tick
+        const includeNotes = includeNotesMap[student.id] || false;
+        if (includeNotes && student.notes[monthKey] && student.notes[monthKey].trim()) {
+            const notesSection = document.createElement('div');
+            notesSection.className = "notes-section mt-4";
 
-                studentSessions.forEach(session => {
-                    const sessionItem = document.createElement('div');
-                    sessionItem.className = 'session-item';
-                    sessionItem.textContent = formatDisplayDate(session);
-                    sessionGrid.appendChild(sessionItem);
-                });
-                studentSection.appendChild(sessionGrid);
-            }
-            const includeNotes = includeNotesMap[student.id] || false;
-            if (includeNotes && student.notes[monthKey] && student.notes[monthKey].trim()) {
-                const notesSection = document.createElement('div');
-                notesSection.className = "notes-section";
-                const notesParagraph = document.createElement('p');
-                notesParagraph.innerHTML = '<strong>Ghi chú:</strong> ' + 
-                    student.notes[monthKey].replace(/\n/g, '<br>').replace(/\r/g, '').trim();
-                notesSection.appendChild(notesParagraph);
-                studentSection.appendChild(notesSection);
-            }
-            receiptContentEl.appendChild(studentSection);
-        });
-        receiptTotalFeeEl.textContent = totalFee.toLocaleString();
-    }
+            const notesParagraph = document.createElement('p');
+            notesParagraph.innerHTML = '<strong>Ghi chú:</strong> ' + 
+                student.notes[monthKey]
+                    .replace(/\n/g, '<br>')
+                    .replace(/\r/g, '')
+                    .trim();
+
+            notesSection.appendChild(notesParagraph);
+            studentSection.appendChild(notesSection);
+        }
+        
+        receiptContentEl.appendChild(studentSection);
+    });
+    
+    receiptTotalFeeEl.textContent = totalFee.toLocaleString();
+}
 
     function saveToFile() {
         if (students.length === 0) {
             alert('Không có dữ liệu nào để lưu');
             return;
         }
-
+     
         const data = {
             students: students,
             lastUpdated: new Date().toISOString()
         };
-
+     
         const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
-
+     
         const a = document.createElement('a');
         a.href = url;
         a.download = `hocphi_${new Date().toISOString().slice(0,10)}.json`;
         a.click();
-
+     
         URL.revokeObjectURL(url);
     }
 
     function loadFromFile(event) {
         const file = event.target.files[0];
         if (!file) return;
-
+     
         const reader = new FileReader();
         reader.onload = function(e) {
             try {
@@ -1192,10 +1292,6 @@
         };
         reader.readAsText(file);
         fileInputEl.value = '';
-    }
-
-    function printReceipt() {
-        window.print();
     }
 </script>
 </body>
