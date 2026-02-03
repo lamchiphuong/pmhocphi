@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PM Tính Học Phí - ver 2.3</title>
+    <title>PM Tính Học Phí - ver 2.4</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap');
@@ -120,21 +120,25 @@
                 max-width: 100%;
             }
         }
-        
     </style>
 </head>
 <body class="bg-gray-50">
+
     <div class="container mx-auto px-4 py-8 max-w-6xl">
-        <header class="text-center mb-8">
+        <header class="text-center mb-8 relative">
             <h1 class="text-3xl font-bold text-blue-600 mb-2">PHẦN MỀM TÍNH HỌC PHÍ</h1>
-            <p class="text-gray-600">Phiên bản 2.3 - được phát triển bởi Lâm Chí Phương</p>
+            <p class="text-gray-600">Phiên bản 2.4 - được phát triển bởi Lâm Chí Phương</p>
             <p class="text-gray-600">Email: lamchiphuong.work@gmail.com</p>
+
+            <button id="whatsNewBtn" class="absolute top-0 right-0 bg-indigo-600 text-white text-sm px-3 py-1 rounded hover:bg-indigo-700 transition">
+                What's New (2.4)
+            </button>
         </header>
+
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <!-- Student Input Section -->
             <div class="bg-white rounded-xl shadow-md p-6 lg:col-span-1">
                 <h2 class="text-xl font-semibold mb-4 text-gray-800">Thông tin học viên</h2>
-             
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-1" for="studentName">Tên học viên</label>
                     <input type="text" id="studentName" placeholder="Nhập tên học viên" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -162,10 +166,10 @@
                 </div>
                 <input type="file" id="fileInput" accept=".json" class="hidden">
             </div>
+
             <!-- Calendar Section -->
             <div class="bg-white rounded-xl shadow-md p-6 lg:col-span-2">
                 <h2 class="text-xl font-semibold mb-4 text-gray-800">Điểm danh buổi học</h2>
-             
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-1">Chọn học viên</label>
                     <select id="studentSelect" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -174,9 +178,7 @@
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Chọn buổi học</label>
-                    <div id="calendarGrid" class="grid grid-cols-7 gap-2">
-                        <!-- Calendar days will be added here by JavaScript -->
-                    </div>
+                    <div id="calendarGrid" class="grid grid-cols-7 gap-2"></div>
                 </div>
                 <div class="flex justify-between">
                     <button id="prevMonthBtn" class="bg-gray-200 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-300 transition duration-200">
@@ -189,14 +191,11 @@
                 </div>
             </div>
         </div>
-        <!-- Student List and Fee Calculation -->
+
         <div class="mt-8">
             <h2 class="text-xl font-semibold mb-4 text-gray-800">Danh sách học viên và học phí</h2>
-         
-            <div id="studentsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <!-- Student cards will be added here by JavaScript -->
-            </div>
-            <!-- Summary Section -->
+            <div id="studentsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+
             <div class="mt-6 bg-white rounded-xl shadow-md p-6">
                 <div class="flex justify-between items-center">
                     <div>
@@ -218,11 +217,36 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal What's New -->
+    <div id="whatsNewModal" class="modal">
+        <div class="modal-content max-w-lg">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold text-indigo-700">Cập nhật phiên bản 2.4</h2>
+                <button id="closeWhatsNewBtn" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+            </div>
+            <div class="space-y-3 text-gray-700">
+                <p><strong>Thay đổi chính:</strong></p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Giảm giá và ghi chú giờ là <strong>riêng cho từng tháng</strong> (không còn áp dụng chung)</li>
+                    <li>Thêm nút "What's New" để xem thông tin cập nhật</li>
+                    <li>Giữ nguyên tất cả chức năng cũ: điểm danh, xuất phiếu, in ấn, lưu/mở file</li>
+                </ul>
+                <p class="text-sm italic mt-4">Cảm ơn anh đã sử dụng phần mềm!</p>
+            </div>
+            <div class="mt-6 text-right">
+                <button id="closeWhatsNewConfirmBtn" class="bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700">
+                    Đóng
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Edit Discount Modal -->
     <div id="editDiscountModal" class="modal">
         <div class="modal-content max-w-md">
             <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-bold text-gray-800">Chỉnh sửa giảm giá</h2>
+                <h2 class="text-xl font-bold text-gray-800">Chỉnh sửa giảm giá <span class="text-sm font-normal text-gray-500">(tháng hiện tại)</span></h2>
                 <button id="closeEditDiscountBtn" class="text-gray-500 hover:text-gray-700">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -243,11 +267,12 @@
             </div>
         </div>
     </div>
+
     <!-- Edit Notes Modal -->
     <div id="editNotesModal" class="modal">
         <div class="modal-content max-w-md">
             <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-bold text-gray-800">Chỉnh sửa ghi chú</h2>
+                <h2 class="text-xl font-bold text-gray-800">Chỉnh sửa ghi chú <span class="text-sm font-normal text-gray-500">(tháng hiện tại)</span></h2>
                 <button id="closeEditNotesBtn" class="text-gray-500 hover:text-gray-700">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -268,6 +293,7 @@
             </div>
         </div>
     </div>
+
     <!-- Select Students Modal -->
     <div id="selectStudentsModal" class="modal">
         <div class="modal-content">
@@ -279,9 +305,7 @@
                     </svg>
                 </button>
             </div>
-            <div id="selectStudentsList" class="mb-4 max-h-60 overflow-y-auto">
-                <!-- Student checkboxes will be added here by JavaScript -->
-            </div>
+            <div id="selectStudentsList" class="mb-4 max-h-60 overflow-y-auto"></div>
             <div class="flex justify-between mb-4">
                 <label class="flex items-center">
                     <input type="checkbox" id="selectAllStudents" class="mr-2">
@@ -299,37 +323,34 @@
             </div>
         </div>
     </div>
+
     <!-- Receipt Modal -->
     <div id="receiptModal" class="modal">
         <div class="modal-content" id="printable-receipt">
             <div class="text-center mb-6">
-    <h2 class="text-3xl font-bold text-blue-600">PHIẾU BÁO HỌC PHÍ</h2>
-    <h3 class="text-2xl font-semibold text-gray-800 mt-3">THÁNG <span id="receiptMonthDisplay"></span></h3>
-</div>
+                <h2 class="text-3xl font-bold text-blue-600">PHIẾU BÁO HỌC PHÍ</h2>
+                <h3 class="text-2xl font-semibold text-gray-800 mt-3">THÁNG <span id="receiptMonthDisplay"></span></h3>
+            </div>
 
-<div class="flex justify-end mb-4 no-print">
-    <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-    </button>
-</div>
-         
+            <div class="flex justify-end mb-4 no-print">
+                <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
             <div class="flex justify-between mb-6">
                 <p class="text-sm"><strong>Ngày xuất:</strong> <span id="receiptDate"></span></p>
                 <p class="text-sm"><strong>Mã phiếu:</strong> HPDK-<span id="receiptNumber"></span></p>
             </div>
-         
-         
-            <div id="receiptContent">
-                <!-- Filled by JavaScript -->
-            </div>
-    
-         
+
+            <div id="receiptContent"></div>
+
             <div class="mt-6 text-right">
                 <p class="text-xl font-bold">TỔNG CỘNG: <span id="receiptTotalFee" class="text-blue-600">0</span> đ</p>
             </div>
-         
+
             <div class="mt-8 flex justify-between">
                 <div class="text-center">
                     <p class="font-bold">Người lập phiếu</p>
@@ -340,7 +361,7 @@
                     <p class="text-sm text-gray-500 mt-4">(Ký, ghi rõ họ tên)</p>
                 </div>
             </div>
-         
+
             <div class="mt-6 flex justify-center no-print">
                 <button id="printReceiptBtn" class="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition duration-200">
                     In phiếu
@@ -348,15 +369,20 @@
             </div>
         </div>
     </div>
+
 <script>
-    // Initialize variables
+    // ================================================
+    // BIẾN TOÀN CỤC
+    // ================================================
     let currentMonth = new Date().getMonth();
     let currentYear = new Date().getFullYear();
     let students = [];
     let lastSavedState = null;
     let currentEditingStudentId = null;
- 
-    // DOM Elements
+
+    // ================================================
+    // DOM ELEMENTS
+    // ================================================
     const studentNameEl = document.getElementById('studentName');
     const studentClassEl = document.getElementById('studentClass');
     const feeRateEl = document.getElementById('feeRate');
@@ -381,7 +407,6 @@
     const loadFromFileBtn = document.getElementById('loadFromFileBtn');
     const saveToFileBtn = document.getElementById('saveToFileBtn');
     const fileInputEl = document.getElementById('fileInput');
-    // Select Students Modal Elements
     const selectStudentsModal = document.getElementById('selectStudentsModal');
     const selectStudentsListEl = document.getElementById('selectStudentsList');
     const selectAllStudentsEl = document.getElementById('selectAllStudents');
@@ -389,44 +414,93 @@
     const generateReceiptBtn = document.getElementById('generateReceiptBtn');
     const closeSelectModalBtn = document.getElementById('closeSelectModalBtn');
     const cancelSelectBtn = document.getElementById('cancelSelectBtn');
-    // Edit Notes Modal Elements
     const editNotesModal = document.getElementById('editNotesModal');
     const editNotesTextarea = document.getElementById('editNotesTextarea');
     const closeEditNotesBtn = document.getElementById('closeEditNotesBtn');
     const cancelEditNotesBtn = document.getElementById('cancelEditNotesBtn');
     const saveEditNotesBtn = document.getElementById('saveEditNotesBtn');
-    // Edit Discount Modal Elements
     const editDiscountModal = document.getElementById('editDiscountModal');
     const editDiscountInput = document.getElementById('editDiscountInput');
     const closeEditDiscountBtn = document.getElementById('closeEditDiscountBtn');
     const cancelEditDiscountBtn = document.getElementById('cancelEditDiscountBtn');
     const saveEditDiscountBtn = document.getElementById('saveEditDiscountBtn');
- 
-    // Initialize the app
+    const whatsNewModal = document.getElementById('whatsNewModal');
+    const closeWhatsNewBtn = document.getElementById('closeWhatsNewBtn');
+    const closeWhatsNewConfirmBtn = document.getElementById('closeWhatsNewConfirmBtn');
+    const whatsNewBtn = document.getElementById('whatsNewBtn');
+
+    // ================================================
+    // UTILITY FUNCTIONS
+    // ================================================
+    function getCurrentMonthKey() {
+        return `${currentMonth + 1}-${currentYear}`;
+    }
+
+    function saveStudents() {
+        localStorage.setItem('tutoringStudents', JSON.stringify(students));
+    }
+
+    function formatDate(date) {
+        const d = new Date(date);
+        let month = '' + (d.getMonth() + 1);
+        let day = '' + d.getDate();
+        const year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+        return [year, month, day].join('-');
+    }
+
+    function formatDisplayDate(dateStr) {
+        const date = new Date(dateStr);
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+    }
+
+    // ================================================
+    // LOAD & MIGRATE DỮ LIỆU
+    // ================================================
     document.addEventListener('DOMContentLoaded', function() {
         updateMonthYearDisplay();
         generateCalendar();
-     
-        // Load students from localStorage if available
+
         const savedStudents = localStorage.getItem('tutoringStudents');
         if (savedStudents) {
-            students = JSON.parse(savedStudents);
-            // Đảm bảo cấu trúc sessions tương thích (chuyển đổi nếu cần)
-            students = students.map(s => ({
-                ...s,
-                sessions: s.sessions && Array.isArray(s.sessions) ? {} : s.sessions || {} // Chuyển đổi mảng cũ thành object rỗng nếu cần
-            }));
-            updateStudentSelect();
-            renderStudentCards();
-            updateSummary();
+            try {
+                students = JSON.parse(savedStudents);
+                // Migration: chuyển discount/notes cũ sang dạng object per-month
+                students = students.map(s => {
+                    let discounts = s.discounts || {};
+                    let notes = s.notes || {};
+                    if (typeof s.discount === 'number') {
+                        discounts[getCurrentMonthKey()] = s.discount;
+                    }
+                    if (typeof s.notes === 'string' && s.notes.trim()) {
+                        notes[getCurrentMonthKey()] = s.notes;
+                    }
+                    return {
+                        ...s,
+                        discounts,
+                        notes,
+                        sessions: s.sessions && Array.isArray(s.sessions) ? {} : s.sessions || {},
+                        discount: undefined, // xóa key cũ
+                    };
+                });
+                updateStudentSelect();
+                renderStudentCards();
+                updateSummary();
+            } catch (e) {
+                console.error("Lỗi parse dữ liệu cũ:", e);
+            }
         }
-     
+
         // Event listeners
         addStudentBtn.addEventListener('click', addStudent);
         prevMonthBtn.addEventListener('click', showPreviousMonth);
         nextMonthBtn.addEventListener('click', showNextMonth);
         studentSelectEl.addEventListener('change', updateAttendanceCheckboxes);
-        calendarGridEl.addEventListener('change', handleCalendarChange); // Thay thế event listener cũ
+        calendarGridEl.addEventListener('change', handleCalendarChange);
         clearAllBtn.addEventListener('click', clearAllData);
         showReceiptBtn.addEventListener('click', openSelectStudentsModal);
         closeModalBtn.addEventListener('click', closeReceiptModal);
@@ -434,307 +508,237 @@
         loadFromFileBtn.addEventListener('click', () => fileInputEl.click());
         saveToFileBtn.addEventListener('click', saveToFile);
         fileInputEl.addEventListener('change', loadFromFile);
-     
-        // Select Students Modal Event Listeners
+
         closeSelectModalBtn.addEventListener('click', closeSelectStudentsModal);
         cancelSelectBtn.addEventListener('click', closeSelectStudentsModal);
         selectAllStudentsEl.addEventListener('change', toggleSelectAll);
         generateReceiptBtn.addEventListener('click', generateReceiptFromSelection);
-     
-        // Edit Notes Modal Event Listeners
+
         closeEditNotesBtn.addEventListener('click', closeEditNotesModal);
         cancelEditNotesBtn.addEventListener('click', closeEditNotesModal);
         saveEditNotesBtn.addEventListener('click', saveEditNotes);
-     
-        // Edit Discount Modal Event Listeners
+
         closeEditDiscountBtn.addEventListener('click', closeEditDiscountModal);
         cancelEditDiscountBtn.addEventListener('click', closeEditDiscountModal);
         saveEditDiscountBtn.addEventListener('click', saveEditDiscount);
-     
-        // Close modals when clicking outside
+
+        whatsNewBtn.addEventListener('click', () => whatsNewModal.style.display = 'block');
+        closeWhatsNewBtn.addEventListener('click', () => whatsNewModal.style.display = 'none');
+        closeWhatsNewConfirmBtn.addEventListener('click', () => whatsNewModal.style.display = 'none');
+
         window.addEventListener('click', function(event) {
-            if (event.target === receiptModal) {
-                closeReceiptModal();
-            }
-            if (event.target === selectStudentsModal) {
-                closeSelectStudentsModal();
-            }
-            if (event.target === editNotesModal) {
-                closeEditNotesModal();
-            }
-            if (event.target === editDiscountModal) {
-                closeEditDiscountModal();
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
             }
         });
     });
 
-    // === THÊM MỚI: Hàm lấy key tháng hiện tại ===
-    function getCurrentMonthKey() {
-        // Trả về định dạng: 12-2025 (Tháng + 1 vì getMonth() trả về 0-11)
-        return `${currentMonth + 1}-${currentYear}`; 
-    }
- 
-    // Save students to localStorage
-    function saveStudents() {
-        localStorage.setItem('tutoringStudents', JSON.stringify(students));
-    }
- 
-    // Add a new student
     function addStudent() {
         const name = studentNameEl.value.trim();
         const className = studentClassEl.value.trim();
         const feeRate = parseInt(feeRateEl.value) || 100000;
-     
-        if (!name) {
-            alert('Vui lòng nhập tên học viên');
-            return;
-        }
-     
-        // Check if student already exists
-        if (students.some(student => student.name.toLowerCase() === name.toLowerCase())) {
-            alert('Học viên đã tồn tại trong hệ thống');
-            return;
-        }
-     
-        const student = {
+
+        if (!name) return alert('Vui lòng nhập tên học viên');
+        if (students.some(s => s.name.toLowerCase() === name.toLowerCase())) return alert('Học viên đã tồn tại');
+
+        students.push({
             id: Date.now().toString(),
-            name: name,
+            name,
             class: className,
-            feeRate: feeRate,
-            discount: 0,
-            notes: '',
-            sessions: {} // THAY THẾ: Sử dụng object để lưu sessions theo key tháng/năm
-        };
-     
-        students.push(student);
+            feeRate,
+            discounts: {},
+            notes: {},
+            sessions: {}
+        });
+
         saveStudents();
         updateStudentSelect();
         renderStudentCards();
         updateSummary();
-     
-        // Clear inputs
+
         studentNameEl.value = '';
         studentClassEl.value = '';
         feeRateEl.value = '100000';
     }
- 
-    // Update student dropdown
+
     function updateStudentSelect() {
         studentSelectEl.innerHTML = '<option value="">-- Chọn học viên --</option>';
-     
-        students.forEach(student => {
-            const option = document.createElement('option');
-            option.value = student.id;
-            const classDisplay = student.class ? `${student.class} - ` : '';
-            option.textContent = `${student.name} (${classDisplay}${student.feeRate.toLocaleString()} đ/buổi)`;
-            studentSelectEl.appendChild(option);
+        students.forEach(s => {
+            const opt = document.createElement('option');
+            opt.value = s.id;
+            opt.textContent = `${s.name} (${s.class ? s.class + ' - ' : ''}${s.feeRate.toLocaleString()} đ/buổi)`;
+            studentSelectEl.appendChild(opt);
         });
     }
- 
-    // Generate calendar for the current month
+
     function generateCalendar() {
         calendarGridEl.innerHTML = '';
-     
-        // Get first day of the month
         const firstDay = new Date(currentYear, currentMonth, 1);
-     
-        // Get last day of the month
         const lastDay = new Date(currentYear, currentMonth + 1, 0);
-     
-        // Get days in month
         const daysInMonth = lastDay.getDate();
-     
-        // Đổi thứ 2 thành đầu tuần
         let startingDay = firstDay.getDay();
         startingDay = (startingDay === 0) ? 6 : startingDay - 1;
-     
-        // Add empty cells for days before the first day of the month
+
         for (let i = 0; i < startingDay; i++) {
             const emptyCell = document.createElement('div');
             emptyCell.className = 'h-8';
             calendarGridEl.appendChild(emptyCell);
         }
-     
-        // Add day cells
+
         for (let day = 1; day <= daysInMonth; day++) {
             const date = new Date(currentYear, currentMonth, day);
             const formattedDate = formatDate(date);
-         
+
             const dayCell = document.createElement('div');
             dayCell.className = 'flex flex-col items-center';
-         
-            // Lấy thứ trong tuần
+
             const weekdays = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"];
             const weekdayLabel = document.createElement('span');
             weekdayLabel.className = 'text-xs text-gray-500';
             weekdayLabel.textContent = weekdays[date.getDay()];
-            // Ngày
+
             const dayNumber = document.createElement('span');
             dayNumber.className = 'text-sm font-medium';
             dayNumber.textContent = day;
-            // Thêm cả thứ + ngày vào cell
-            dayCell.appendChild(weekdayLabel);
-            dayCell.appendChild(dayNumber);
-         
+
             const checkboxContainer = document.createElement('label');
             checkboxContainer.className = 'checkbox-container mt-1 cursor-pointer';
-         
+
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
             checkbox.className = 'hidden';
             checkbox.dataset.date = formattedDate;
-         
+
             const checkmark = document.createElement('span');
             checkmark.className = 'checkmark block w-6 h-6 border border-gray-300 rounded';
-         
+
             checkboxContainer.appendChild(checkbox);
             checkboxContainer.appendChild(checkmark);
-         
+
+            dayCell.appendChild(weekdayLabel);
             dayCell.appendChild(dayNumber);
             dayCell.appendChild(checkboxContainer);
             calendarGridEl.appendChild(dayCell);
         }
     }
 
-    // === THAY THẾ: Hàm xử lý điểm danh chung cho lịch (chỉ gọi toggleSession) ===
     function handleCalendarChange(event) {
         if (event.target.type === 'checkbox' && event.target.dataset.date) {
             toggleSession(event.target.dataset.date, event.target.checked);
         }
     }
- 
-    // === THAY THẾ: Toggle session attendance (chỉ cho tháng hiện tại) ===
+
     function toggleSession(date, attended) {
         const studentId = studentSelectEl.value;
-     
         if (!studentId) {
             alert('Vui lòng chọn học viên trước khi điểm danh');
-            // Cần reset trạng thái checkbox nếu không có học viên được chọn
             const checkbox = calendarGridEl.querySelector(`input[data-date="${date}"]`);
-            if (checkbox) checkbox.checked = !attended; 
+            if (checkbox) checkbox.checked = !attended;
             return false;
         }
-     
+
         const student = students.find(s => s.id === studentId);
-        const monthKey = getCurrentMonthKey(); // Lấy key tháng hiện tại
-     
-        // Đảm bảo mảng sessions cho tháng hiện tại tồn tại
-        if (!student.sessions[monthKey]) {
-            student.sessions[monthKey] = [];
-        }
-     
+        const monthKey = getCurrentMonthKey();
+
+        if (!student.sessions[monthKey]) student.sessions[monthKey] = [];
+
         let monthSessions = student.sessions[monthKey];
-     
+
         if (attended) {
-            // Thêm buổi học vào mảng của tháng hiện tại
             if (!monthSessions.includes(date)) {
                 monthSessions.push(date);
-                monthSessions.sort(); // Sắp xếp lại cho đẹp
+                monthSessions.sort();
             }
         } else {
-            // Xóa buổi học khỏi mảng của tháng hiện tại
             monthSessions = monthSessions.filter(d => d !== date);
         }
-     
-        // Cập nhật lại mảng sessions của tháng
+
         student.sessions[monthKey] = monthSessions;
-     
         saveStudents();
         renderStudentCards();
         updateSummary();
         return true;
     }
- 
-    // === THAY THẾ: Update attendance checkboxes based on selected student (chỉ cho tháng hiện tại) ===
+
     function updateAttendanceCheckboxes() {
         const studentId = studentSelectEl.value;
         const checkboxes = calendarGridEl.querySelectorAll('input[type="checkbox"]');
-        const monthKey = getCurrentMonthKey(); // Lấy key tháng hiện tại
-     
+        const monthKey = getCurrentMonthKey();
+
         checkboxes.forEach(checkbox => {
             checkbox.checked = false;
-         
             if (studentId) {
                 const student = students.find(s => s.id === studentId);
-                // Lấy sessions của tháng hiện tại
-                const monthSessions = student.sessions[monthKey] || []; 
-                if (student && monthSessions.includes(checkbox.dataset.date)) {
+                const monthSessions = student.sessions[monthKey] || [];
+                if (monthSessions.includes(checkbox.dataset.date)) {
                     checkbox.checked = true;
                 }
             }
         });
     }
- 
-    // Show previous month
+
     function showPreviousMonth() {
         currentMonth--;
-     
         if (currentMonth < 0) {
             currentMonth = 11;
             currentYear--;
         }
-     
         updateMonthYearDisplay();
         generateCalendar();
-        updateAttendanceCheckboxes(); // Cập nhật lại trạng thái điểm danh cho tháng mới
-        renderStudentCards(); // Cập nhật lại học phí cho tháng mới
+        updateAttendanceCheckboxes();
+        renderStudentCards();
         updateSummary();
     }
- 
-    // Show next month
+
     function showNextMonth() {
         currentMonth++;
-     
         if (currentMonth > 11) {
             currentMonth = 0;
             currentYear++;
         }
-     
         updateMonthYearDisplay();
         generateCalendar();
-        updateAttendanceCheckboxes(); // Cập nhật lại trạng thái điểm danh cho tháng mới
-        renderStudentCards(); // Cập nhật lại học phí cho tháng mới
+        updateAttendanceCheckboxes();
+        renderStudentCards();
         updateSummary();
     }
- 
-    // Update month/year display
+
     function updateMonthYearDisplay() {
         const months = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
                        'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
         currentMonthYearEl.textContent = `${months[currentMonth]} ${currentYear}`;
     }
- 
-    // === Cập nhật: Render student cards (chỉ tính học phí tháng hiện tại) ===
+
     function renderStudentCards() {
         studentsListEl.innerHTML = '';
-        
         const monthKey = getCurrentMonthKey();
 
         students.forEach(student => {
-            // Lấy sessions và sessionCount của tháng hiện tại
             const studentSessions = student.sessions[monthKey] || [];
             const sessionCount = studentSessions.length;
-            
+            const discount = student.discounts[monthKey] || 0;
+            const notes = student.notes[monthKey] || '';
+
             const totalFeeBeforeDiscount = sessionCount * student.feeRate;
-            const discountAmount = totalFeeBeforeDiscount * (student.discount / 100);
+            const discountAmount = totalFeeBeforeDiscount * (discount / 100);
             const totalFee = totalFeeBeforeDiscount - discountAmount;
-         
+
             const card = document.createElement('div');
             card.className = 'fee-card bg-white rounded-lg overflow-hidden shadow-md border-l-4 border-blue-500 hover:border-blue-600';
-         
+
             let notesHtml = '';
-            if (student.notes && student.notes.trim()) {
+            if (notes.trim()) {
                 notesHtml = `
                     <div class="mt-3 p-2 bg-yellow-50 border border-yellow-200 rounded text-sm text-gray-700">
-                        <strong>Ghi chú:</strong> ${student.notes}
+                        <strong>Ghi chú (tháng này):</strong><br>${notes.replace(/\n/g, '<br>')}
                     </div>
                 `;
             }
-         
-            const buttonText = student.notes && student.notes.trim() ? 'Chỉnh sửa ghi chú' : 'Thêm ghi chú';
+
+            const buttonText = notes.trim() ? 'Chỉnh sửa ghi chú' : 'Thêm ghi chú';
             const classDisplay = student.class ? `<p class="text-sm text-gray-600 mt-1">Lớp: ${student.class}</p>` : '';
-            const discountDisplay = student.discount > 0 ? `<div class="flex justify-between mt-1"><span class="text-gray-600 text-xs">Giảm giá:</span><span class="font-medium text-xs text-red-600">${student.discount}%</span></div>` : '';
-         
+            const discountDisplay = discount > 0 ? `<div class="flex justify-between mt-1"><span class="text-gray-600 text-xs">Giảm giá:</span><span class="font-medium text-xs text-red-600">${discount}%</span></div>` : '';
+
             card.innerHTML = `
                 <div class="p-4">
                     <div class="flex justify-between items-start mb-3">
@@ -744,7 +748,7 @@
                                 <button class="edit-notes-btn bg-yellow-500 text-white px-2 py-1 rounded text-xs hover:bg-yellow-600 transition duration-200" data-id="${student.id}">
                                     ${buttonText}
                                 </button>
-                                ${student.notes && student.notes.trim() ? `<button class="delete-notes-btn bg-red-400 text-white px-2 py-1 rounded text-xs hover:bg-red-500 transition duration-200" data-id="${student.id}">Xóa ghi chú</button>` : ''}
+                                ${notes.trim() ? `<button class="delete-notes-btn bg-red-400 text-white px-2 py-1 rounded text-xs hover:bg-red-500 transition duration-200" data-id="${student.id}">Xóa ghi chú</button>` : ''}
                             </div>
                             <div class="flex space-x-1">
                                 <button class="edit-discount-btn bg-green-500 text-white px-2 py-1 rounded text-xs hover:bg-green-600 transition duration-200" data-id="${student.id}">
@@ -775,93 +779,81 @@
                     ${notesHtml}
                 </div>
             `;
-         
+
             studentsListEl.appendChild(card);
         });
-     
-        // Add event listeners to delete buttons
+
         document.querySelectorAll('.delete-student-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 deleteStudent(this.dataset.id);
             });
         });
-        // Add event listeners to edit notes buttons
         document.querySelectorAll('.edit-notes-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 editNotes(this.dataset.id);
             });
         });
-        // Add event listeners to delete notes buttons
         document.querySelectorAll('.delete-notes-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 deleteNotes(this.dataset.id);
             });
         });
-        // Add event listeners to edit discount buttons
         document.querySelectorAll('.edit-discount-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 editDiscount(this.dataset.id);
             });
         });
     }
- 
-    // Edit notes for a student
+
     function editNotes(studentId) {
         currentEditingStudentId = studentId;
         const student = students.find(s => s.id === studentId);
         if (student) {
-            editNotesTextarea.value = student.notes || '';
+            editNotesTextarea.value = student.notes[getCurrentMonthKey()] || '';
             editNotesModal.style.display = 'block';
             document.body.style.overflow = 'hidden';
         }
     }
-    // Delete notes for a student
+
     function deleteNotes(studentId) {
-        if (confirm('Bạn có chắc muốn xóa ghi chú của học viên này?')) {
+        if (confirm('Bạn có chắc muốn xóa ghi chú của tháng này?')) {
             const student = students.find(s => s.id === studentId);
             if (student) {
-                student.notes = '';
+                delete student.notes[getCurrentMonthKey()];
                 saveStudents();
                 renderStudentCards();
             }
         }
     }
-    // Save edited notes
+
     function saveEditNotes() {
         if (currentEditingStudentId) {
             const student = students.find(s => s.id === currentEditingStudentId);
             if (student) {
-                student.notes = editNotesTextarea.value.trim();
+                student.notes[getCurrentMonthKey()] = editNotesTextarea.value.trim();
                 saveStudents();
                 renderStudentCards();
                 closeEditNotesModal();
             }
         }
     }
-    // Close Edit Notes Modal
-    function closeEditNotesModal() {
-        editNotesModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-        currentEditingStudentId = null;
-        editNotesTextarea.value = '';
-    }
-    // Edit discount for a student
+
     function editDiscount(studentId) {
         currentEditingStudentId = studentId;
         const student = students.find(s => s.id === studentId);
         if (student) {
-            editDiscountInput.value = student.discount || 0;
+            editDiscountInput.value = student.discounts[getCurrentMonthKey()] || 0;
             editDiscountModal.style.display = 'block';
             document.body.style.overflow = 'hidden';
         }
     }
-    // Save edited discount
+
     function saveEditDiscount() {
         if (currentEditingStudentId) {
             const student = students.find(s => s.id === currentEditingStudentId);
             if (student) {
                 const discountValue = parseFloat(editDiscountInput.value) || 0;
-                student.discount = Math.max(0, Math.min(100, discountValue)); // Clamp between 0-100
+                student.discounts[getCurrentMonthKey()] = Math.max(0, Math.min(100, discountValue));
                 saveStudents();
                 renderStudentCards();
                 updateSummary();
@@ -869,32 +861,35 @@
             }
         }
     }
-    // Close Edit Discount Modal
+
+    function closeEditNotesModal() {
+        editNotesModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        currentEditingStudentId = null;
+    }
+
     function closeEditDiscountModal() {
         editDiscountModal.style.display = 'none';
         document.body.style.overflow = 'auto';
         currentEditingStudentId = null;
-        editDiscountInput.value = '';
     }
- 
-    // Delete a student
+
     function deleteStudent(id) {
         if (confirm('Bạn có chắc muốn xóa học viên này?')) {
             students = students.filter(student => student.id !== id);
             saveStudents();
-         
+
             if (studentSelectEl.value === id) {
                 studentSelectEl.value = '';
             }
-         
+
             updateStudentSelect();
             renderStudentCards();
             updateSummary();
             updateAttendanceCheckboxes();
         }
     }
- 
-    // Clear all data
+
     function clearAllData() {
         if (confirm('Bạn có chắc muốn xóa tất cả dữ liệu?')) {
             students = [];
@@ -906,48 +901,25 @@
             updateAttendanceCheckboxes();
         }
     }
- 
-    // === Cập nhật: Update summary information (chỉ tính tổng học phí tháng hiện tại) ===
+
     function updateSummary() {
         let totalFees = 0;
         const monthKey = getCurrentMonthKey();
-     
+
         students.forEach(student => {
-            // Lấy sessions và sessionCount của tháng hiện tại
             const studentSessions = student.sessions[monthKey] || [];
             const sessionCount = studentSessions.length;
-            
+            const discount = student.discounts[monthKey] || 0;
+
             const totalFeeBeforeDiscount = sessionCount * student.feeRate;
-            const discountAmount = totalFeeBeforeDiscount * (student.discount / 100);
+            const discountAmount = totalFeeBeforeDiscount * (discount / 100);
             totalFees += totalFeeBeforeDiscount - discountAmount;
         });
-     
+
         totalStudentsEl.textContent = students.length;
         totalFeesEl.textContent = totalFees.toLocaleString();
     }
- 
-    // Format date as YYYY-MM-DD
-    function formatDate(date) {
-        const d = new Date(date);
-        let month = '' + (d.getMonth() + 1);
-        let day = '' + d.getDate();
-        const year = d.getFullYear();
-     
-        if (month.length < 2) month = '0' + month;
-        if (day.length < 2) day = '0' + day;
-     
-        return [year, month, day].join('-');
-    }
- 
-    // Format date display in Vietnamese format
-    function formatDisplayDate(dateStr) {
-        const date = new Date(dateStr);
-        const day = date.getDate();
-        const month = date.getMonth() + 1;
-        const year = date.getFullYear();
-        return `${day}/${month}/${year}`;
-    }
-    // Open Select Students Modal
+
     function openSelectStudentsModal() {
         if (students.length === 0) {
             alert('Không có học viên nào để xuất phiếu');
@@ -957,89 +929,71 @@
         selectStudentsModal.style.display = 'block';
         document.body.style.overflow = 'hidden';
     }
-    // Close Select Students Modal
+
     function closeSelectStudentsModal() {
         selectStudentsModal.style.display = 'none';
         document.body.style.overflow = 'auto';
-        // Reset selections
         selectStudentsListEl.innerHTML = '';
         selectAllStudentsEl.checked = false;
-        selectAllStudentsEl.indeterminate = false; // Thêm reset indeterminate
+        selectAllStudentsEl.indeterminate = false;
         updateGenerateButton();
     }
-    // Populate Select Students List
+
     function populateSelectStudentsList() {
         selectStudentsListEl.innerHTML = '';
-        const monthKey = getCurrentMonthKey(); // Lấy key tháng hiện tại
+        const monthKey = getCurrentMonthKey();
 
         students.forEach(student => {
-            // Lấy sessions và sessionCount của tháng hiện tại
             const studentSessions = student.sessions[monthKey] || [];
             const sessionCount = studentSessions.length;
-            
+            const discount = student.discounts[monthKey] || 0;
             const totalFeeBeforeDiscount = sessionCount * student.feeRate;
-            const discountAmount = totalFeeBeforeDiscount * (student.discount / 100);
+            const discountAmount = totalFeeBeforeDiscount * (discount / 100);
             const totalFee = totalFeeBeforeDiscount - discountAmount;
-            
+
             const div = document.createElement('div');
             div.className = 'flex items-center p-2 border-b';
             const classDisplay = student.class ? `${student.class} - ` : '';
-            const notesInfo = student.notes && student.notes.trim() ? ` (Có ghi chú: "${student.notes.substring(0, 30)}${student.notes.length > 30 ? '...' : ''}")` : ' (Không có ghi chú)';
-            const discountInfo = student.discount > 0 ? ` (Giảm ${student.discount}%)` : '';
-            
+            const notesInfo = student.notes[monthKey] && student.notes[monthKey].trim() ? ` (Có ghi chú: "${student.notes[monthKey].substring(0, 30)}${student.notes[monthKey].length > 30 ? '...' : ''}")` : ' (Không có ghi chú)';
+            const discountInfo = discount > 0 ? ` (Giảm ${discount}%)` : '';
+
             div.innerHTML = `
                 <input type="checkbox" class="mr-2 student-select-checkbox" data-id="${student.id}" id="select-${student.id}">
                 <label for="select-${student.id}" class="flex-1 cursor-pointer text-sm">
                     ${student.name} (${classDisplay}${sessionCount} buổi (${totalFee.toLocaleString()} đ)${notesInfo}${discountInfo}
                 </label>
-                <input type="checkbox" class="ml-3 include-notes-checkbox" data-id="${student.id}" id="include-${student.id}" ${student.notes && student.notes.trim() ? '' : 'disabled'}>
+                <input type="checkbox" class="ml-3 include-notes-checkbox" data-id="${student.id}" id="include-${student.id}" ${student.notes[monthKey] && student.notes[monthKey].trim() ? '' : 'disabled'}>
                 <label for="include-${student.id}" class="ml-1 text-xs text-gray-500 cursor-pointer">Chèn ghi chú</label>
             `;
             selectStudentsListEl.appendChild(div);
         });
-        // Add event listeners to student checkboxes
+
         document.querySelectorAll('.student-select-checkbox').forEach(checkbox => {
             checkbox.addEventListener('change', updateGenerateButton);
         });
-        // Add event listeners to include notes checkboxes (only if student selected)
-        document.querySelectorAll('.include-notes-checkbox').forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                // Optional: can add logic here if needed
-            });
-            // Disable if no notes
-            const studentId = checkbox.dataset.id;
-            const student = students.find(s => s.id === studentId);
-            if (!student.notes || !student.notes.trim()) {
-                checkbox.disabled = true;
-                checkbox.checked = false;
-            } else {
-                checkbox.checked = true; // Default to checked if has notes
-            }
-        });
+
+        updateGenerateButton();
     }
-    // Toggle Select All
+
     function toggleSelectAll() {
         const checkboxes = document.querySelectorAll('.student-select-checkbox');
         checkboxes.forEach(checkbox => {
             checkbox.checked = selectAllStudentsEl.checked;
-            // If selecting all, set include notes based on whether they have notes
             const includeCheckbox = document.querySelector(`.include-notes-checkbox[data-id="${checkbox.dataset.id}"]`);
             if (includeCheckbox) {
                 const student = students.find(s => s.id === checkbox.dataset.id);
-                // Chỉ bật nếu có ghi chú và đang chọn tất cả
-                includeCheckbox.checked = selectAllStudentsEl.checked && !!(student.notes && student.notes.trim());
+                includeCheckbox.checked = selectAllStudentsEl.checked && !!(student.notes[getCurrentMonthKey()] && student.notes[getCurrentMonthKey()].trim());
             }
         });
         updateGenerateButton();
     }
-    // Update Generate Button State
+
     function updateGenerateButton() {
         const checkboxes = document.querySelectorAll('.student-select-checkbox:checked');
         const count = checkboxes.length;
         selectedCountEl.textContent = `${count} học viên được chọn`;
         generateReceiptBtn.disabled = count === 0;
-        
-        // Cập nhật trạng thái của checkbox "Chọn tất cả"
+
         if (students.length > 0) {
             if (count === students.length) {
                 selectAllStudentsEl.checked = true;
@@ -1053,82 +1007,72 @@
             }
         }
     }
-    // Generate Receipt from Selection
+
     function generateReceiptFromSelection() {
         const selectedIds = Array.from(document.querySelectorAll('.student-select-checkbox:checked')).map(cb => cb.dataset.id);
         const selectedStudents = students.filter(s => selectedIds.includes(s.id));
         if (selectedStudents.length === 0) return;
-        // Collect include notes flags
+
         const includeNotesMap = {};
         selectedIds.forEach(id => {
             const includeCheckbox = document.querySelector(`.include-notes-checkbox[data-id="${id}"]`);
             includeNotesMap[id] = includeCheckbox ? includeCheckbox.checked : false;
         });
+
         closeSelectStudentsModal();
         updateReceiptContent(selectedStudents, includeNotesMap);
         openReceiptModal();
     }
-    // Open Receipt Modal
+
     function openReceiptModal() {
         receiptModal.style.display = 'block';
         document.body.style.overflow = 'hidden';
     }
-    // Close Receipt Modal
+
     function closeReceiptModal() {
         receiptModal.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
- 
-    // Print receipt
-    function printReceipt() {
-        window.print();
-    }
- 
-    // === Cập nhật: Update Receipt Content (chỉ hiển thị sessions và tính phí tháng hiện tại) ===
+
     function updateReceiptContent(selectedStudents = students, includeNotesMap = {}) {
         receiptContentEl.innerHTML = '';
         const today = new Date();
         receiptDateEl.textContent = today.toLocaleDateString('vi-VN');
-        
-        const monthKey = getCurrentMonthKey(); // Lấy key tháng hiện tại
 
-        // Hiển thị tháng đang tính (dùng tháng hiện tại của lịch, không phải tháng xuất phiếu)
+        const monthKey = getCurrentMonthKey();
+
         const monthsDisplay = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
-        document.getElementById('receiptMonthDisplay').textContent = 
-            `${monthsDisplay[currentMonth]} / ${currentYear}`;
-            
+        document.getElementById('receiptMonthDisplay').textContent = `${monthsDisplay[currentMonth]} / ${currentYear}`;
+
         const month = String(today.getMonth() + 1).padStart(2, '0');
         const year = String(today.getFullYear()).slice(-2);
-        
-        // Tạo snapshot hiện tại (danh sách học viên + buổi học)
-        // Lưu ý: snapshot này chỉ quan tâm đến student.id + sessions của tháng hiện tại
+
         const currentState = JSON.stringify(selectedStudents.map(s => ({
             id: s.id, 
             sessions: s.sessions[monthKey] || [], 
             includeNotes: includeNotesMap[s.id]
         })));
-        
-        // Nếu khác lần trước thì mới +1
+
         let receiptCounter = localStorage.getItem(`receiptCounter-${month}${year}`) || 0;
         if (lastSavedState !== currentState) {
             receiptCounter = parseInt(receiptCounter) + 1;
             localStorage.setItem(`receiptCounter-${month}${year}`, receiptCounter);
-            lastSavedState = currentState; // cập nhật trạng thái
+            lastSavedState = currentState;
         }
         const serial = String(receiptCounter).padStart(5, '0');
         receiptNumberEl.textContent = `${month}${year}-${serial}`;
-        // --- phần render học viên giữ nguyên ---
+
         let totalFee = 0;
         selectedStudents.forEach(student => {
-            // Lấy sessions và sessionCount của tháng hiện tại
             const studentSessions = student.sessions[monthKey] || [];
             const sessionCount = studentSessions.length;
-            
+            const discount = student.discounts[monthKey] || 0;
+
             const totalFeeBeforeDiscount = sessionCount * student.feeRate;
-            const discountAmount = totalFeeBeforeDiscount * (student.discount / 100);
+            const discountAmount = totalFeeBeforeDiscount * (discount / 100);
             const studentTotal = totalFeeBeforeDiscount - discountAmount;
             totalFee += studentTotal;
-            
+
             const studentSection = document.createElement('div');
             studentSection.className = "mb-6 p-4 border rounded-lg bg-gray-50";
             const header = document.createElement('h3');
@@ -1154,13 +1098,13 @@
                 <div>${studentTotal.toLocaleString()} đ</div>
             `;
             studentSection.appendChild(dataRow);
-            if (student.discount > 0) {
+            if (discount > 0) {
                 const discountRow = document.createElement('div');
                 discountRow.className = 'receipt-row text-sm text-red-600';
                 discountRow.innerHTML = `
                     <div></div>
                     <div></div>
-                    <div>Giảm giá: ${student.discount}%</div>
+                    <div>Giảm giá: ${discount}%</div>
                     <div>-${discountAmount.toLocaleString()} đ</div>
                 `;
                 studentSection.appendChild(discountRow);
@@ -1172,8 +1116,7 @@
                 studentSection.appendChild(detailTitle);
                 const sessionGrid = document.createElement('div');
                 sessionGrid.className = "session-grid mt-2";
-                
-                // Dùng studentSessions của tháng hiện tại
+
                 studentSessions.forEach(session => {
                     const sessionItem = document.createElement('div');
                     sessionItem.className = 'session-item';
@@ -1182,19 +1125,13 @@
                 });
                 studentSection.appendChild(sessionGrid);
             }
-            // Add notes if included
             const includeNotes = includeNotesMap[student.id] || false;
-            if (includeNotes && student.notes && student.notes.trim()) {
+            if (includeNotes && student.notes[monthKey] && student.notes[monthKey].trim()) {
                 const notesSection = document.createElement('div');
                 notesSection.className = "notes-section";
-
                 const notesParagraph = document.createElement('p');
                 notesParagraph.innerHTML = '<strong>Ghi chú:</strong> ' + 
-                    student.notes
-                        .replace(/\n/g, '<br>')  // Chuyển \n thành <br>
-                        .replace(/\r/g, '')      // Xử lý trường hợp \r\n (Windows)
-                        .trim();
-
+                    student.notes[monthKey].replace(/\n/g, '<br>').replace(/\r/g, '').trim();
                 notesSection.appendChild(notesParagraph);
                 studentSection.appendChild(notesSection);
             }
@@ -1202,35 +1139,33 @@
         });
         receiptTotalFeeEl.textContent = totalFee.toLocaleString();
     }
- 
-    // Save data to file
+
     function saveToFile() {
         if (students.length === 0) {
             alert('Không có dữ liệu nào để lưu');
             return;
         }
-     
+
         const data = {
             students: students,
             lastUpdated: new Date().toISOString()
         };
-     
+
         const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
-     
+
         const a = document.createElement('a');
         a.href = url;
         a.download = `hocphi_${new Date().toISOString().slice(0,10)}.json`;
         a.click();
-     
+
         URL.revokeObjectURL(url);
     }
- 
-    // Load data from file
+
     function loadFromFile(event) {
         const file = event.target.files[0];
         if (!file) return;
-     
+
         const reader = new FileReader();
         reader.onload = function(e) {
             try {
@@ -1239,9 +1174,8 @@
                     students = data.students.map(s => ({
                         ...s,
                         class: s.class || '',
-                        discount: s.discount || 0,
-                        notes: s.notes || '', // Ensure notes field exists
-                        // Đảm bảo sessions là object cho cấu trúc mới
+                        discounts: s.discounts || (typeof s.discount === 'number' ? { [getCurrentMonthKey()]: s.discount } : {}),
+                        notes: s.notes || (typeof s.notes === 'string' ? { [getCurrentMonthKey()]: s.notes } : {}),
                         sessions: s.sessions && Array.isArray(s.sessions) ? {} : s.sessions || {}
                     }));
                     saveStudents();
@@ -1257,7 +1191,11 @@
             }
         };
         reader.readAsText(file);
-        fileInputEl.value = ''; // Reset file input
+        fileInputEl.value = '';
+    }
+
+    function printReceipt() {
+        window.print();
     }
 </script>
 </body>
